@@ -14,7 +14,7 @@ with DAG(
     ) as dag:
     drop_table = PostgresOperator(
         task_id = 'drop_table',
-        sql = """DROP TABLE IF EXISTS comp_teste;""",
+        sql = """DROP TABLE IF EXISTS comp_test;""",
         postgres_conn_id = 'datamart',
         autocommit = True)
     create_table = PostgresOperator(
