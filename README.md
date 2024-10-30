@@ -8,8 +8,8 @@ Este repositório contém a configuração e os fluxos de trabalho (DAGs) do Apa
 
 Requisitos
 
-- Apache Airflow 2.x
-- Python 3.8+
+- Apache Airflow 2.10.2
+- Python 3.12.3
 - PostgreSQL
 
 Instalação
@@ -41,4 +41,4 @@ Para mais informações, entre em contato com [seu-nome] em [seu-email].
 Changelog
 
 - [29/10/2024]: Criação do arquivo
-- [data2]: Descrição da alteração2
+- [30/10/2024]: Alteração dos requisitos e outros ajustes
