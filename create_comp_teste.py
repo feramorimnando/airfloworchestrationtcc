@@ -19,7 +19,7 @@ with DAG(
     create_table = PostgresOperator(
         task_id = 'create_table',
         sql = """
-            CREATE TABLE comp_test AS select distinct ed.""Competência concessão"" from extract_datalake ed;
+            CREATE TABLE comp_test AS select distinct ed."Competência concessão" from extract_datalake ed;
             """
             ,
         postgres_conn_id = 'datamart',
