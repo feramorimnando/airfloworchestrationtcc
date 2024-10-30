@@ -10,6 +10,7 @@ with DAG(
     start_date=datetime.datetime(2020, 2, 2),
     schedule="@monthly",
     catchup=False,
+    tags=["tcc","teste"],
     ) as dag:
     drop_table = PostgresOperator(
         task_id = 'drop_table',
