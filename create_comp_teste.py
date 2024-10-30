@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.postgres_operator import PostgresOperator
-
+import datetime
 #ENV_ID = os.environ.get("SYSTEM_TESTS_ENV_ID")
 DAG_ID = "create_table_teste"
 
