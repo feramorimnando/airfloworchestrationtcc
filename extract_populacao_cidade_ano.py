@@ -18,7 +18,6 @@ filename_populacao_cidade_ano = 'populacao_cidade_ano'
 
 def extract_data(path, filename):
     engine = create_engine('postgresql://db-teste.cvosgcqg050g.us-east-2.rds.amazonaws.com:5432/postgres?user=postgres&password=123456789')
-    conn = engine.connect()
     df = pd.read_csv(path,sep=";",header=0,encoding='UTF-8')
     metadata = MetaData() 
     def infer_sqlalchemy_type(dtype):
@@ -35,8 +34,8 @@ def extract_data(path, filename):
             return String(255)      
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
-    
-    df.to_sql(tablename, con=engine, index=False, chunksize=25000, method='None', if_exists='replace')
+    with engine.connect as conn:
+        df.to_sql(tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='replace')
 
 with DAG(
     dag_id=DAG_ID,
