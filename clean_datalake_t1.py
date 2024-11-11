@@ -73,7 +73,7 @@ with DAG(
         deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
     )
     trg_clean_municipio_t1 = TriggerDagRunOperator(
-        task_id="trigger_create_clean_cid_t1",
+        task_id="trigger_create_clean_municipio_t1",
         trigger_dag_id="create_clean_municipio_t1",
         wait_for_completion=True,
         deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
