@@ -39,7 +39,7 @@ def extract_data(path, filename):
     #insp = sqlalchemy.inspect(engine)
     if not engine.dialect.has_table(table_name=tablename, connection=engine.connect()):
         tablex.create(engine)
-    df.to_sql(tablename, con=engine, index=False, chunksize=25000, method='None', if_exists='append')
+    df.to_sql(tablename, con=conn, index=False, chunksize=25000, method='None', if_exists='append')
 
 
 with DAG(
