@@ -13,7 +13,7 @@ import psycopg2 as psy
 
 DAG_ID = "extract_populacao_cidade_ano"
 
-path_populacao_cidade_ano = '/home/ubuntu/repository/airfloworchestrationtcc/extract_data/populacao_cidade_ano.py'
+path_populacao_cidade_ano = '/home/ubuntu/repository/airfloworchestrationtcc/extract_data/populacao_cidade_ano.csv'
 
 def extract_data(filename):
     engine = create_engine('postgresql://db-teste.cvosgcqg050g.us-east-2.rds.amazonaws.com:5432/postgres?user=postgres&password=123456789')
