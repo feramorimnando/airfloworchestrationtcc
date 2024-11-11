@@ -19,7 +19,6 @@ filename_populacao_cidade_ano = 'populacao_cidade_ano'
 def extract_data(path, filename):
     engine = create_engine('postgresql://db-teste.cvosgcqg050g.us-east-2.rds.amazonaws.com:5432/postgres?user=postgres&password=123456789')
     conn = engine.connect()
-    #filename = 'C:\\Users\\Bitlabz\\Downloads\\GEX.csv'
     df = pd.read_csv(path,sep=";",header=0,encoding='UTF-8')
     metadata = MetaData() 
     def infer_sqlalchemy_type(dtype):
@@ -37,9 +36,9 @@ def extract_data(path, filename):
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
     tablex = Table(tablename, metadata, *columns)
-    insp = sa.inspect(engine)
-    if not insp.has_table(tablename,schema='public'):
-        tablex.create(engine)
+    #insp = sa.inspect(engine)
+    #if not insp.has_table(tablename,schema='public'):
+    tablex.create(engine)
     df.to_sql(tablename, con=engine, index=False, chunksize=25000, method='None', if_exists='append')
 
 
