@@ -14,8 +14,8 @@ import psycopg2 as psy
 DAG_ID = "extract_populacao_cidade_ano"
 
 path_populacao_cidade_ano = '/home/ubuntu/repository/airfloworchestrationtcc/extract_data/populacao_cidade_ano.csv'
-
-def extract_data(filename):
+filename_populacao_cidade_ano = 'populacao_cidade_ano'
+def extract_data(path, filename):
     engine = create_engine('postgresql://db-teste.cvosgcqg050g.us-east-2.rds.amazonaws.com:5432/postgres?user=postgres&password=123456789')
     conn = engine.connect()
     #filename = 'C:\\Users\\Bitlabz\\Downloads\\GEX.csv'
@@ -52,7 +52,7 @@ with DAG(
 
     extract_populacao = PythonOperator(
         task_id='extract_populacao',
-        python_callable=extract_data(path_populacao_cidade_ano),
+        python_callable=extract_data(path_populacao_cidade_ano, filename_populacao_cidade_ano),
         dag=dag
     )
 
