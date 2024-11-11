@@ -35,7 +35,7 @@ def extract_data(path, filename):
     tablename = 'extract_' + filename
     tablex = Table(tablename, metadata, *columns)
     with engine.connect() as conn:
-        df.to_sql(name=tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='replace')
+        df.to_sql(name=tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='append')
 
 with DAG(
     dag_id=DAG_ID,
