@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.postgres_operator import PostgresOperator
 import datetime
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 #ENV_ID = os.environ.get("SYSTEM_TESTS_ENV_ID")
 DAG_ID = "create_clean_datalake_t1"
 
