@@ -50,7 +50,7 @@ with DAG(
         python_callable=extract_data,
         op_kwargs={
            "path": path_populacao_cidade_ano,
-            "db_table": filename_populacao_cidade_ano
+            "filename": filename_populacao_cidade_ano
         },
         dag=dag
     )
