@@ -34,7 +34,7 @@ def extract_data(path, filename):
             return String(255)      
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
-    with engine.connect as conn:
+    with engine.connect() as conn:
         df.to_sql(tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='replace')
 
 with DAG(
