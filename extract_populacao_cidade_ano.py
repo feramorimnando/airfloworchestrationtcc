@@ -47,7 +47,11 @@ with DAG(
 
     extract_populacao = PythonOperator(
         task_id='extract_populacao',
-        python_callable=extract_data(path_populacao_cidade_ano, filename_populacao_cidade_ano),
+        python_callable=extract_data,
+        op_kwargs={
+           "path": path_populacao_cidade_ano,
+            "db_table": filename_populacao_cidade_ano
+        },
         dag=dag
     )
 
