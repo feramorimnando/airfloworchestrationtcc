@@ -1,6 +1,5 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.postgres_operator import PostgresOperator
 import datetime
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
@@ -34,8 +33,9 @@ def extract_data(path, filename):
             return String(255)      
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
+    tablex = Table(tablename, metadata, *columns)
     with engine.connect() as conn:
-        df.to_sql(tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='replace')
+        df.to_sql(name=tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='replace')
 
 with DAG(
     dag_id=DAG_ID,
