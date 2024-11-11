@@ -6,7 +6,7 @@ from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
 from datetime import date
 import time
-import sqlalchemy 
+import sqlalchemy as sa
 from sqlalchemy import create_engine, Table, Column, Integer,Float, String, MetaData
 import pandas as pd
 import psycopg2 as psy
@@ -36,11 +36,11 @@ def extract_data(path, filename):
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
     tablex = Table(tablename, metadata, *columns)
-    #insp = sqlalchemy.inspect(engine)
-    if not engine.dialect.has_table(table_name=tablename, connection=engine.connect()):
+    insp = sa.inspect(engine)
+ 
+    if not insp.has_table(tablename,schema='public'):
         tablex.create(engine)
     df.to_sql(tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='append')
-
 
 with DAG(
     dag_id=DAG_ID,
