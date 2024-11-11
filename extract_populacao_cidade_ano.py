@@ -37,7 +37,7 @@ def extract_data(path, filename):
     tablename = 'extract_' + filename
     tablex = Table(tablename, metadata, *columns)
     #insp = sqlalchemy.inspect(engine)
-    if not engine.dialect.has_table(table_name=tablename):
+    if not engine.dialect.has_table(table_name=tablename, connection=engine.connect()):
         tablex.create(engine)
     df.to_sql(tablename, con=engine, index=False, chunksize=25000, method='None', if_exists='append')
 
