@@ -36,8 +36,8 @@ def extract_data(path, filename):
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
     tablex = Table(tablename, metadata, *columns)
-    insp = sqlalchemy.inspect(engine)
-    if not insp.dialect.has_table(tablename,connection=conn,schema='public'):
+    #insp = sqlalchemy.inspect(engine)
+    if not engine.dialect.has_table(tablename,connection=conn):
         tablex.create(engine)
     df.to_sql(tablename, con=engine, index=False, chunksize=25000, method='None', if_exists='append')
 
