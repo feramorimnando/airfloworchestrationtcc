@@ -36,8 +36,7 @@ def extract_data(path, filename):
     columns = [Column(name, infer_sqlalchemy_type(dtype)) for name, dtype in df.dtypes.items()]
     tablename = 'extract_' + filename
     
-
-    df.to_sql(tablename, con=conn.connection, index=False, chunksize=25000, method='None', if_exists='replace')
+    df.to_sql(tablename, con=engine, index=False, chunksize=25000, method='None', if_exists='replace')
 
 with DAG(
     dag_id=DAG_ID,
