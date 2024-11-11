@@ -15,11 +15,12 @@ DAG_ID = "extract_populacao_cidade_ano"
 
 path_populacao_cidade_ano = '/home/ubuntu/repository/airfloworchestrationtcc/extract_data/populacao_cidade_ano.csv'
 filename_populacao_cidade_ano = 'populacao_cidade_ano'
+
 def extract_data(path, filename):
     engine = create_engine('postgresql://db-teste.cvosgcqg050g.us-east-2.rds.amazonaws.com:5432/postgres?user=postgres&password=123456789')
     conn = engine.connect()
     #filename = 'C:\\Users\\Bitlabz\\Downloads\\GEX.csv'
-    df = pd.read_csv(filename,sep=";",header=0,encoding='UTF-8')
+    df = pd.read_csv(path,sep=";",header=0,encoding='UTF-8')
     metadata = MetaData() 
     def infer_sqlalchemy_type(dtype):
         """ Map pandas dtype to SQLAlchemy's types """
