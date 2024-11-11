@@ -65,4 +65,17 @@ with DAG(
         postgres_conn_id = 'datamart',
         autocommit = True)
 
-    drop_clean_datalake_t1 >> create_clean_datalake_t1
+    trg_clean_cid_t1 = TriggerDagRunOperator(
+        task_id="trigger_create_clean_cid_t1",
+        trigger_dag_id="create_clean_cid_t1",
+        wait_for_completion=True,
+        deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
+    )
+    trg_clean_municipio_t1 = TriggerDagRunOperator(
+        task_id="trigger_create_clean_cid_t1",
+        trigger_dag_id="create_clean_municipio_t1",
+        wait_for_completion=True,
+        deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
+    )
+
+    drop_clean_datalake_t1 >> create_clean_datalake_t1 >> [trg_clean_cid_t1,trg_clean_municipio_t1]
